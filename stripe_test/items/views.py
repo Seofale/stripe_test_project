@@ -29,8 +29,8 @@ def get_item_stripe_session(request, pk):
             'quantity': 1,
         }],
         mode='payment',
-        success_url=f'https://project-stripe-test.herokuapp.com{reverse("success")}',
-        cancel_url=f'https://project-stripe-test.herokuapp.com{reverse("cancel")}',
+        success_url=f'http://localhost:8000{reverse("success")}',
+        cancel_url=f'http://localhost:8000{reverse("cancel")}',
     )
 
     return Response({'session_id': session.id})
@@ -77,8 +77,8 @@ def get_order_stripe_session(request, pk):
             'coupon': order.discount.pk,
         }],
         mode='payment',
-        success_url=f'https://project-stripe-test.herokuapp.com{reverse("success")}',
-        cancel_url=f'https://project-stripe-test.herokuapp.com{reverse("cancel")}',
+        success_url=f'http://localhost:8000{reverse("success")}',
+        cancel_url=f'http://localhost:8000{reverse("cancel")}',
     )
 
     return Response({'session_id': session.id})
