@@ -19,3 +19,5 @@ docker-compose exec python createsuperuser
 Create your items and orders and discounts in admin panel django.
 
 http://0.0.0.0:8000/items/item/<item_id>/ returns rendered html with form to redirect for stripe buy form.
+
+http://0.0.0.0:8000/items/order/<order_id>/ returns rendered html with form to redirect for stripe buy form with all items in your order.
