@@ -1,0 +1,37 @@
+<html>
+  <head>
+    <title>Buy заказ № {{ order.pk}}</title>
+  </head>
+  <body>
+    <h1>Заказ № {{ order.pk}}</h1>
+    <p>{{order.sum_price}} {{order.currency}}</p>
+    <h2>Состав заказа:</h2>
+    {% for item in order.items.all %}
+      <p>--------------------------------</p>
+      <p>Товар: {{item.name}}</p>
+      <p>Цена: {{item.price}} {{item.currency}}</p>
+      <p>Описание: {{item.description}}</p>
+      <p>--------------------------------</p>
+      {% if order.discount %}
+        <p>Скидка на заказ: {{order.discount.percent_off}}%</p>
+      {% endif %}
+    {% endfor %}
+    <button id="buy-button">Buy</button>
+    <script src="https://js.stripe.com/v3"></script>
+    <script type="text/javascript">
+      var stripe = Stripe('pk_test_51LhldFKTF9wvb3TqghZXjNX17eg8bPT48xfz13cgpQVJA89HqBIGGdMSR1opwde4rNy3k7r8jONDNxmdwVIDrdLY000Eap5Jqn');
+      var buyButton = document.getElementById('buy-button');
+      buyButton.addEventListener('click', function() {
+        fetch('{% url "get_order_stripe_session" order.pk %}', {
+            method: 'GET',
+        })
+        .then(function(response) {
+            return response.json();
+        })
+        .then(function(session) {
+            return stripe.redirectToCheckout({ sessionId: session.session_id });
+        })
+      })
+    </script>
+  </body>
+</html>
