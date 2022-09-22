@@ -3,6 +3,11 @@
 
 
 ## Installation
+Clone repository
+```bash
+git clone https://github.com/Dert2/stripe_test_project
+```
+
 Create file .env in the root directory, and put these variables there
 ```bash
 SECRET_KEY=...
@@ -18,8 +23,6 @@ DB_PORT=...
 Then run the containers
 
 ```bash
-git clone https://github.com/Dert2/stripe_test_project
-
 docker-compose up
 
 docker-compose exec python manage.py migrate
